@@ -8,37 +8,37 @@ library(wordcloud)
 library(RColorBrewer)
 library(dplyr)
 
-#ValidaÁ„o dos objetos 
+#Valida√ß√£o dos objetos 
 
-consumer_key <- "4mNZxoJQOLXldjjx3sM8Qw8uR"
-consumer_key_secret <- "AJipsbBGPUlXB9OYHHUw896wCrJCunCMANpXg9s5MVGghojrvY"
-token_acesso <- "1228324028382949376-47MgWasiIzm5tZWDuk9fCpuEbAu8tp"
-token_acesso_secreto <- "ZfOiwOWc9jPJ1ngdR4TP4oXbZYgw2JUBHIJ7k9uAO3KlP"
+consumer_key <- ""
+consumer_key_secret <- ""
+token_acesso <- ""
+token_acesso_secreto <- ""
 
 
-#AutenticaÁ„o
+#Autentica√ß√£o
 
 setup_twitter_oauth(consumer_key, consumer_key_secret, token_acesso,token_acesso_secreto)
 
-searchTwitteR("AEB")
+searchTwitteR("covid")
 ?searchTwitteR
-AEB <- searchTwitter("AEB", lang = "pt", n = 2500)
+covid <- searchTwitter("covid", lang = "pt", n = 2500)
 
 #Executando e transformando em Data frame 
 
-AEB <- AEB %>% twListToDF()
-view(AEB)
+covid <- covid %>% twListToDF()
+view(covid)
 
-#Tweets da conta da @espacial_aeb
+#Tweets de conta que tenha acesso p√∫blico
 
-tweets_aeb <- searchTwitter("@espacial_aeb", n = 200)
-head(tweets_aeb)
+tweets_A <- searchTwitter("@", n = 200)
+head(tweets_A)
 
-#InformaÁıes do usu·rio
+#Informa√ß√µes do usu√°rio
 
-myuser <- getUser("espacial_aeb")
+myuser <- getUser("A")
 
-#FunÁıes possiveis 
+#Fun√ß√µes possiveis 
 
 myuser$getClass()
 
@@ -63,7 +63,7 @@ myuser$getFavoritesCount()
 #myuser$getFollowerIDs()
 #myuser$getFollowers()
 
-timeline <- userTimeline("espacial_aeb", n = 200)
+timeline <- userTimeline("A", n = 200)
 head(timeline)
 
 #WordCloud
@@ -89,31 +89,4 @@ tweeter.frequencia <- table(tweeter)
 
 wordcloud(names(tweeter.frequencia), tweeter.frequencia, min.freq = 3, max.words = Inf, random.order = TRUE, random.color = TRUE, rot.per = .1,
           colors = "black", ordered.colors = TRUE, use.r.layout = TRUE, fixed.asp = TRUE)
-
-
-#Tweets da conta do @mctic
-
-tweets_mctic <- searchTwitteR("mctic", n = 200)
-head(tweets_mctic)
-
-#InformaÁıes do usu·rio
-
-myuser <- getUser("mctic")
-myuser$created
-myuser$description
-
-#Data Mining 
-
-availableTrendLocations() %>% View()
-getTrends("455819") %>% view
-?getTrends()
-searchTwitteR("#CLA")
-searchTwitteR("#Alcantara")
-searchTwitteR("#AEB")
-searchTwitteR("#FAB")
-
-retweets <- strip_retweets(tweets_aeb)
-retweets <- retweets %>% twListToDF()
-view(retweets)
-?strip_retweets()
 
