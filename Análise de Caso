@@ -1,0 +1,91 @@
+library(magrittr)
+library(lubridate)
+library(dplyr)
+library(twitteR)
+library(reshape)
+library(ggplot2)
+
+#Leitura dos dados
+
+dados <- read.csv("dados/US_Accidents_June20.csv")
+View(dados)
+
+#Adicionando coluna de qtd
+
+dados["qtd_acidentes"] <- c("1")
+View(dados)
+
+df <- as.data.frame(dados)
+View(df)
+df %>% group_by(df$State)
+View(df)
+df$qtd_acidentes <- as.numeric(as.character(df$qtd_acidentes))
+
+sapply(df, is.numeric)
+dados <- df[,sapply (dados, is.numeric)]
+str(dados)
+
+#Item 1
+#--------------------------------------------------------------
+qtd_acidentes_State = aggregate(qtd_acidentes ~ State,data = df,sum)
+View(qtd_acidentes_State)
+
+#Estado com mais acidentes foi a CA
+
+qtd_acidentes = aggregate(qtd_acidentes ~ Severity, data = df,sum)
+View(qtd_acidentes)
+
+#Estado com piores motoristas - Usando como base a gravidade dos acidentes 
+#CA foi o Estado com acidentes mais graves, logo com piores motoristas
+
+gravidade = aggregate(Severity ~ State, data = df, sum)
+View(gravidade)
+
+
+#Item 2
+#--------------------------------------------------------------
+#Trabalhando com a StartDate
+
+x <- as.Date(df$Start_Time)
+day(x)
+
+Dia_semana <- wday(x, label = TRUE, abbr = FALSE, week_start = getOption("lubridate.week.start",7),locale = Sys.getlocale("LC_TIME"))
+acidente_dia = aggregate(qtd_acidentes ~ Dia_semana, data = df, sum)
+View(acidente_dia)
+#Ocorreram mais acidentes na sexta-feira
+
+#Item 3
+#--------------------------------------------------------------
+
+#Clima com que teve mais acidentes foi o Clear 
+clima = aggregate(qtd_acidentes ~ Weather_Condition, data = df,sum)
+View(clima)
+
+#Incosistência ocorre pois podem haver outros fatores que podem incidir nessa decisão
+
+#Item 4
+#--------------------------------------------------------------
+
+Mes <- month(x, label = TRUE, abbr = FALSE, locale = Sys.getlocale("LC_TIME"))
+Mes
+acidentes_mes = aggregate(qtd_acidentes ~Mes, data = df, sum)
+print(acidentes_mes)
+View(acidentes_mes)
+#M?s com mais acidentes foi Outubro
+
+acidentes_mes_gravidade=aggregate(Severity ~Mes, data = df,sum )
+View(acidentes_mes_gravidade)
+
+vento = aggregate(qtd_acidentes ~Wind_Direction,data = df,sum)
+View(vento)
+
+
+#Item 5
+#--------------------------------------------------------------
+#Separar o data frame com as gravidades
+
+gravidade = aggregate(Severity ~Start_Time, data = df, mean)
+View(gravidade)
+
+acidentes_gravidade = aggregate(qtd_acidentes ~ Severity, data = df,sum)
+View(acidentes_gravidade)
