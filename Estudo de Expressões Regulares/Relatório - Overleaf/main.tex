@@ -1,0 +1,71 @@
+\documentclass[a4paper]{article} 
+\input{head}
+\begin{document}
+
+%-------------------------------
+%	TITLE SECTION
+%-------------------------------
+
+\fancyhead[C]{}
+\hrule \medskip % Upper rule
+\begin{minipage}{0.295\textwidth} 
+\raggedright
+\footnotesize
+Mariana Borges de Sampaio \hfill\\   
+mariana.sampaio@aeb.gov.br
+\end{minipage}
+\begin{minipage}{0.4\textwidth} 
+\centering 
+\large 
+Relatório sobre Expressões Regulares\\ 
+\normalsize 
+Script R\\ 
+\end{minipage}
+\begin{minipage}{0.295\textwidth} 
+\raggedleft
+\today\hfill\\
+\end{minipage}
+\medskip\hrule 
+\bigskip
+
+%-------------------------------
+%	CONTENTS
+%-------------------------------
+
+\section{Resumo}
+Para o estudo de caso foi considerado que ao analisar um grupo de strings deve ser encontrado algum padrão da linguagem que está sendo utilizado.Dessa forma no momento da extração de dados é possível encontrar esses padrões e retirá-los do conjunto de dados que está sendo analisado. Para isso, foi utilizado a pacote tidyverse do R e com ele foram feitos alguns testes para verificar se o script é capaz de identificar esses padrões.
+
+\subsection{Detecção de Padrão}
+Para o primeiro caso foi criado um vetor de strings e sequencialmente foi verificado se é possível obter a detecção do padrão de texto, como teste foi considerado o padrão 'A'. No grupo01 foram inseridos strings que têm relação direta com o tema da AEB. Também foi levado em consideração que a linguagem R é case sensitive. Foi feito o teste utilizando também operador lógico para verificação. 
+\begin{figure}[htb!]
+    \centering
+    \includegraphics[width=0.7\linewidth]{style/image/caso01.png}
+    \caption{Detecção de padrão}
+    \label{fig:Detecção}
+\end{figure}
+\subsection{Indexação}
+Para que seja possível realizar a localização a partir do índice é possível utilizar diretamente a função de subset que existe no pacote tidyverse, dessa forma é possível realizar a identificação do padrão atráves do índice.
+\begin{figure}[htb!]
+    \centering
+    \includegraphics[width=0.7\linewidth]{style/image/caso02.png}
+    \caption{Indexação}
+    \label{fig:Indexação}
+\end{figure}
+\subsection{Remoção de padrões}
+Nesse caso, o tratamento seria feito para realizar a retirada de outliers que se encontram no conjunto de dados que foi extraído. Para simulação foi criado um segundo vetor de strings que possui os três outliers que são mais encontrados na coleta do twitter do projeto para o PDI-CEA. Sendo eles 'cantora', 'jogador' e 'Thiago'.O que foi observado é que a função remove consegue detectar e retirar a palavra que foge do padrão do grupo de dados, no entanto ao realizar uma retirada de um segundo padrão em seguida ele retorna o padrão que havia sido removido anteriormente, causando um problema no processo de remoção do padrão.
+\begin{figure}[htb!]
+    \centering
+    \includegraphics[width=0.7\linewidth]{style/image/caso03.png}
+    \caption{Remoção de padrões}
+    \label{fig:Remover}
+\end{figure}
+
+
+%------------------------------------------------
+\section{Conclusão}
+Diante do que foi apresentado, verifica-se a possibilidade de inserir algumas expressões regulares no script de coleta do projeto sobre o PDI-CEA. Visando ou na detecção de expressões que são de interesse do projeto e manter apenas ela no script ou da retirada de outliers.
+
+\bigskip
+%------------------------------------------------
+
+\end{document}
