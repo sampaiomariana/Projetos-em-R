@@ -77,3 +77,19 @@ grupo06 %>% str_subset("\\D\\.") # \\D -> não dígito
 grupo06 %>% str_subset("\\d\\.") # \\d -> dígito
 grupo06 %>% str_subset("\\.") # \\D -> não dígito
 
+
+# Capturando por grupo de captura 
+grupo03
+grep("lançament[o|os]", grupo03)
+grep("Alc[â|a]ntara", grupo03)
+grep("avanç[ar|os|ou|o]", grupo03)
+grupo03
+
+grupo03
+grep("[a-z]", grupo03,value = TRUE)
+grep("[0-9]", grupo03,value = TRUE)
+grupo06
+grep("[a-z]", grupo06)
+grep("[a-z]", grupo06,value = TRUE)
+grep("[0-9]$", grupo06)
+grep("[0-9]$", grupo06,value = TRUE)
