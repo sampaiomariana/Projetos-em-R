@@ -129,13 +129,44 @@ Na opção de agrupamento ele sinaliza pelo índice aonde se encontra o padrão 
     \caption{Agrupamento com value}
     \label{fig:grepwithvalue}
 \end{figure}
-\section{Tabela}
-Tendo como objetivo ter um acesso rápido as funções e as expressões regulares, segue a tabela com as suas respectivas expressões regulares.
+\section{Script de teste}
+O script realiza a busca por termos como alcântara e alcantara e um segundo teste foi adicionado utilizando a busca por base de alcântara. Essa ecolha foi feita pois aparecem menos outliers possibilitando identificar mais rápido se o dado foi tratado ou não.
+Foi adicionado ao script busca alcântara o pacote tidyverse e posteriormente no momento de realizar a busca com a função search tweets foi mantida a busca por Alcântara. Tendo essa busca é feito um tratamento de forma que sejam realizas as extrações apenas dos padrões que são necessários para o estudo.
+Foi utilizado inicialmente um filtro que utiliza apenas as colunas desejadas para análise, esse método foi adicionado pois ele coleta apenas as colunas de interesse para o banco de dados do aebsocialdata.
+No teste , foi notado que ao realizar a busca utilizando o str detect é possível identificar com true ou false se o elemento que foi colocado para busca foi encontrado ou não.Mas também foi notado que ele não permite que seja exibido a tabela com os valores utilizando apenas essa forma do str detect.As imagens adicionadas abaixo são relacionadas a busca por base de alcântara no twitter utilizando a função search tweets.
+\begin{figure}[htb!]
+    \centering
+    \includegraphics[width=0.9\linewidth]{style/image/teste03.png}
+    \caption{script}
+    \label{fig:script}
+\end{figure}
 
+É possível ver que é realizada a redução de colunas no momento da coleta, sendo essa adaptação útil para o script de coleta atual.
+
+\begin{figure}[htb!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{style/image/teste05.png}
+    \caption{Tratamento das colunas}
+    \label{fig:coluna}
+\end{figure}
+
+\begin{figure}[htb!]
+    \centering
+    \includegraphics[width=0.9\linewidth]{style/image/teste02.png}
+    \caption{str detect}
+    \label{fig:str_detect}
+\end{figure}
+Foi feito um ranking das hashtags que foram citadas na coleta direto no script. 
+\begin{figure}[htb!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{style/image/teste04-hashtags.png}
+    \caption{hashtags}
+    \label{fig:hashtags}
+\end{figure}
 
 \section{Conclusão}
 Diante do que foi apresentado, verifica-se a possibilidade de inserir algumas expressões regulares no script de coleta do projeto sobre o PDI-CEA. Visando na detecção de expressões que são de interesse do projeto e manter apenas ela no script ou da retirada de outliers.
 As expressões seriam utilizadas de maneira preferencial no momento da coleta e ao invés de ser salvo o conjunto de textos e realizar o tratamento depois, no momento da coleta realizar esse tratamento com expressões regulares e salvar o arquivo já tratado no script principal.
-Como caso experimental o ideal é ser feito um teste com um agendamento de coleta para verificar o funcionamento.
+São necessárias adaptações no script para que ele funcione de maneira ideal para o projeto. 
 \bigskip
 \end{document}
